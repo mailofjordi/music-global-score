@@ -1,0 +1,75 @@
+swagger: "2.0"
+info:
+  description: "This is an API to manage global music scores"
+  version: "1.0.0"
+  title: "Music global scores"
+  contact:
+    email: "mailofjordi@gmail.com"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+host: "petstore.swagger.io"
+basePath: "/v2"
+tags:
+- name: "score"
+  description: "Everything about music scores"
+schemes:
+- "http"
+paths:
+  /score/{songId}:
+    get:
+      tags:
+      - "song"
+      summary: "Find a song"
+      description: "Returns a song"
+      operationId: "getSongById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "songId"
+        in: "path"
+        description: "ID of song to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Song"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Song not found"
+definitions:
+  Song:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      global-score:
+        $ref: '#/definitions/GlobalScore'
+    xml:
+      name: "Song"
+  GlobalScore:
+    type: object
+    properties:
+      global-score-providers:
+        type: array
+        items:
+          $ref: '#/definitions/GlobalScoreProvider'
+      score:
+        type: number
+    xml:
+      name: "GlobalScore"
+  GlobalScoreProvider:
+    type: object
+    properties:
+      name:
+        type: string
+    xml:
+      name: "GlobalScoreProvider"
