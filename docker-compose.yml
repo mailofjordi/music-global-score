@@ -1,0 +1,9 @@
+version: '3.2'
+services:
+    go:
+        build:
+          context: ./
+          dockerfile: ./deployments/docker/dev/Dockerfile
+        ports:
+            - 1323:1323
+        container_name: music_global_score_go
