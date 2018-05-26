@@ -22,7 +22,7 @@ type GlobalScoreProvider struct {
 func main() {
 	e := echo.New();
 
-	e.File("/doc", "api/oas.yml")
+	e.File("/doc", "../../api/oas.yml")
 	e.GET("/score/:trackId", getScore)
 
 	e.Logger.Fatal(e.Start(":1323"))
